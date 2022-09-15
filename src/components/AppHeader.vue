@@ -1,6 +1,15 @@
 <script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({});
+import { defineComponent, type PropType } from "vue";
+
+export default defineComponent({
+  data() {
+    return { category: "" as string };
+  },
+  props: {
+    categories: Object as PropType<string[]>,
+  },
+  emits: ["filterCategory"],
+});
 </script>
 
 <template>
@@ -10,15 +19,17 @@ export default defineComponent({});
     <div class="sort">
       <div class="collection-sort">
         <label>Filter by:</label>
-        <select>
-          <option value="/">All Jackets</option>
-          <option value="/">2016</option>
+        <select @change="$emit('filterCategory')">
+          <option v-for="category in categories" :key="category">
+            {{ category }}
+          </option>
+          <!--<option value="/">2016</option>
           <option value="/">jacket</option>
           <option value="/">Jackets</option>
           <option value="/">layers</option>
           <option value="/">Obermeyer</option>
           <option value="/">Roxy</option>
-          <option value="/">womens</option>
+          <option value="/">womens</option>-->
         </select>
       </div>
 

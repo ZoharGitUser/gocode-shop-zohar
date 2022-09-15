@@ -1,25 +1,24 @@
 <script lang="ts">
-import { defineComponent } from "vue";
 import Product from "./Product.vue";
+
+import { defineComponent, type PropType } from "vue";
+import type { ProductType } from "../types/Product";
+
 export default defineComponent({
-  data() {
-    return {};
+  props: {
+    productsList: Object as PropType<ProductType[]>,
   },
   components: { Product },
 });
 </script>
 
-<template lang="">
+<template>
   <section class="products">
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
-    <Product />
+    <Product
+      v-for="(product, index) in productsList"
+      :product="product"
+      :key="product.id"
+    />
   </section>
 </template>
 

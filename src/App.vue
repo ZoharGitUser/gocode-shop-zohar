@@ -2,14 +2,30 @@
 import { defineComponent } from "vue";
 import AppHeader from "./components/AppHeader.vue";
 import Products from "./components/Products.vue";
+import ProductsJsonData from "./assets/products.json";
 export default defineComponent({
   components: { AppHeader, Products },
+  data() {
+    return {
+      ProductsData: ProductsJsonData,
+    };
+  },
+  computed: {
+    categories() {
+      return this.ProductsData.map((p) => p.category).filter(
+        (value, index, array) => array.indexOf(value) === index
+      );
+    },
+  },
+  methods: {
+    //filterCategory:
+  },
 });
 </script>
 
 <template>
-  <AppHeader />
-  <Products></Products>
+  <AppHeader :categories="categories" @filterCategory="filterCategory" />
+  <Products :productsList="ProductsData"></Products>
 </template>
 
 <style>
@@ -154,8 +170,6 @@ table {
 /*------------------------------------*\
   $MAIN
 \*------------------------------------*/
-
-
 
 /* Product Layout */
 
