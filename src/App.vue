@@ -1,8 +1,11 @@
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineComponent, reactive } from "vue";
 import AppHeader from "./components/AppHeader.vue";
 import Products from "./components/Products.vue";
 import ProductsJsonData from "./assets/products.json";
+import { computed } from "vue";
+
+/*
 export default defineComponent({
   components: { AppHeader, Products },
   data() {
@@ -20,11 +23,27 @@ export default defineComponent({
   methods: {
     //filterCategory:
   },
+});*/
+
+const ProductsData = reactive(ProductsJsonData);
+
+const categories = computed(() => {
+  return ProductsData.map((p) => p.category).filter(
+    (value, index, array) => array.indexOf(value) === index
+  );
 });
+
+function filterCategory() {
+  //TODO
+}
 </script>
 
 <template>
-  <AppHeader :categories="categories" @filterCategory="filterCategory" />
+  <AppHeader
+    :computed="categories"
+    :categories="categories"
+    @filterCategory="filterCategory"
+  />
   <Products :productsList="ProductsData"></Products>
 </template>
 

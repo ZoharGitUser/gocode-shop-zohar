@@ -1,6 +1,9 @@
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
+<script setup lang="ts">
+import type { PropType } from "vue";
+import { reactive } from "vue";
+import { ref } from "vue";
 
+/*
 export default defineComponent({
   data() {
     return { category: "" as string };
@@ -9,6 +12,13 @@ export default defineComponent({
     categories: Object as PropType<string[]>,
   },
   emits: ["filterCategory"],
+});
+*/
+
+const category = ref("" as string);
+
+defineProps({
+  categories: Array as PropType<string[]>,
 });
 </script>
 

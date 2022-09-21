@@ -1,11 +1,17 @@
-<script lang="ts">
-import { defineComponent, type PropType } from "vue";
+<script setup lang="ts">
+import type { PropType } from "vue";
 import type { ProductType } from "../types/Product";
 
+/*
 export default defineComponent({
   props: {
     product: Object as PropType<ProductType>,
   },
+});
+*/
+
+defineProps({
+  product: Object as PropType<ProductType>,
 });
 </script>
 
