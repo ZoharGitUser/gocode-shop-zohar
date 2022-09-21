@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from "vue";
-import type { ProductType } from "../types/Product";
+import type { ProductType, ProductInCartType } from "../types/Product";
+import { useCounterStore } from "@/stores/counter";
 
 /*
 export default defineComponent({
@@ -11,8 +12,13 @@ export default defineComponent({
 */
 
 defineProps({
-  product: Object as PropType<ProductType>,
+  product: {
+    type: Object as PropType<ProductType>,
+    required: true,
+  },
 });
+
+const store = useCounterStore();
 </script>
 
 <template>
@@ -23,6 +29,11 @@ defineProps({
     <div class="product-info">
       <h5>{{ product?.title }}</h5>
       <h6>{{ product?.price }}</h6>
+      <div>
+        <button @click="store.addToCart({ item: product, quantity: 1 })">
+          add to cart
+        </button>
+      </div>
     </div>
   </div>
 </template>

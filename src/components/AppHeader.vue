@@ -2,6 +2,7 @@
 import type { PropType } from "vue";
 import { reactive } from "vue";
 import { ref } from "vue";
+import { useCounterStore } from "@/stores/counter";
 
 /*
 export default defineComponent({
@@ -20,12 +21,21 @@ const category = ref("" as string);
 defineProps({
   categories: Array as PropType<string[]>,
 });
+
+const store = useCounterStore();
 </script>
 
 <template>
   <nav class="product-filter">
     <h1>Jackets</h1>
-
+    <div>
+      cart:
+      <div v-for="item in store.cartItems">
+        <div>{{ item.item.title }}</div>
+        <button @click="store.incrementItemCount(item)">Increment Item</button>
+        <div>items count: {{ item.quantity }}</div>
+      </div>
+    </div>
     <div class="sort">
       <div class="collection-sort">
         <label>Filter by:</label>

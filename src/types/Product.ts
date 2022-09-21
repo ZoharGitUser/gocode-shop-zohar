@@ -12,3 +12,12 @@ export type ProductType = {
   image: string;
   rating: RatingType;
 };
+
+export type ProductInCartType = {
+  item: ProductType;
+  quantity: number;
+};
+
+/*export type ProductInCartType = ProductType & {
+  quantity: number;
+};*/
